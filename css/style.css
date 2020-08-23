@@ -7,7 +7,13 @@
 /* ====================
 [variables]
 ======================= */
-
+/* colors */
+:root {
+    --blue: rgba(3, 152, 252);
+    --darkBlue: rgba(0, 105, 166);
+    --lightblue: rgba(134, 188, 219);
+    --black: rgba(20, 20, 20);
+}
 
 /* ====================
 [modules]
@@ -18,4 +24,6 @@
 [layout]
 ======================= */
 /* body */
-body { font-family: Helvetica; }
+body { font-family: Arial, Helvetica, sans-serif; }
+
+/* header */
