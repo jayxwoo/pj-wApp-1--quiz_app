@@ -14,11 +14,17 @@
     --lightblue: rgba(134, 188, 219);
     --black: rgba(20, 20, 20);
     --grey: rgba(128, 128, 128);
+    --lightgrey: rgba(204, 204, 204);
 }
+
 
 /* ====================
 [modules]
 ======================= */
+/* submit button */
+.submit-btn { padding: 0.7em; border: none; color: var(--blue); background: white; border-radius: 5px; cursor: pointer; outline: none; }
+.submit-btn:hover { background: var(--lightgrey); }
+.submit-btn:active { transform: translate(2px, 2px); }
 
 
 /* ====================
@@ -40,7 +46,12 @@ body { font-family: Arial, Helvetica, sans-serif; }
 .result-percentage { color: var(--blue); font-size: 2em; font-weight: bold; }
 
 /* quiz form */
-.main { border: 3px solid red; background: var(--blue); padding: 30px; }
+.main { border: 3px solid red; background: var(--blue); padding: 30px; color: white; }
 .quiz-form fieldset { border: none; }
-.quiz-form-title { color: white; font-weight: bold; font-size: 1.5em; border-bottom: 3px solid white; }
-.question-set {  }
+.quiz-form-title { font-weight: bold; font-size: 1.5em; border-bottom: 3px solid white; }
+.question-set:first-of-type { margin-top: 2em }
+.question-set:last-of-type { margin-bottom: 4em }
+.question-set:not(:first-of-type):not(:last-of-type) { margin: 3em 0; font-size: 1.1em; }
+.option-set { margin: 0 1em; }
+.option { margin: 1.5em 0; }
+.submit-btn { display: block; margin: 0 auto; }
