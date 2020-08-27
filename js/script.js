@@ -9,20 +9,27 @@ let answerChecker = {
     // properties
     form: form,
     answers: ['b', 'a', 'c', 'a'],
+    userAnswers: [],
 
     // methods
     getUserAnswers: function () {
         let checkedRadios = this.form.querySelectorAll('.input-radio:checked');
         let userAnswers = [];
-        checkedRadios.forEach(function (checkedRadio) {
-            userAnswers.push(checkedRadio.value);
+        checkedRadios.forEach((checkedRadio) => {
+            this.userAnswers.push(checkedRadio.value.trim().toLowerCase());
         });
         
-        return userAnswers;
+        return this.userAnswers;
     },
 
     checkUserAnswers: function (userAnswers) {
-        
+        let score = 0;
+        userAnswers.forEach((userAnswer, index) => {
+            if (userAnswer === this.answers[index]) {
+                score += 100 * (1/this.answers.length);
+            };
+        });
+        console.log(score);
     }
 };
 
