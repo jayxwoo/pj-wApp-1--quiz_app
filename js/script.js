@@ -8,25 +8,31 @@ const form = document.querySelector('.quiz-form');
 let answerChecker = {
     // properties
     form: form,
-    answers: ['b', 'a', 'c', 'a'],
-    userAnswers: [],
 
     // methods
-    getUserAnswers: function () {
-        let checkedRadios = this.form.querySelectorAll('.input-radio:checked');
-        let userAnswers = [];
-        checkedRadios.forEach((checkedRadio) => {
-            this.userAnswers.push(checkedRadio.value.trim().toLowerCase());
-        });
-        
-        return this.userAnswers;
+    getAnswers: function () {
+        let answers = [];
+        this.form.querySelectorAll('.question').forEach((question) => {
+            answers.push(question.getAttribute('data-answer'));
+        })
+        return answers;
     },
 
-    checkUserAnswers: function (userAnswers) {
+    getUserAnswers: function () {
+        let userAnswers = []
+        let checkedRadios = this.form.querySelectorAll('.input-radio:checked');
+        checkedRadios.forEach((checkedRadio) => {
+            userAnswers.push(checkedRadio.value.trim().toLowerCase());
+        });
+        
+        return userAnswers;
+    },
+
+    checkUserAnswers: function (answers, userAnswers) {
         let score = 0;
         userAnswers.forEach((userAnswer, index) => {
-            if (userAnswer === this.answers[index]) {
-                score += 100 * (1/this.answers.length);
+            if (userAnswer === answers[index]) {
+                score += 100 * (1/answers.length);
             };
         });
         console.log(score);
@@ -37,6 +43,7 @@ let answerChecker = {
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    const answers = answerChecker.getAnswers();
     const userAnswers = answerChecker.getUserAnswers();
-    answerChecker.checkUserAnswers(userAnswers);
+    answerChecker.checkUserAnswers(answers, userAnswers);
 });
