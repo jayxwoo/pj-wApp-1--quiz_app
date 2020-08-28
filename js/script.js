@@ -1,7 +1,8 @@
 // ========== imports ==========
 import './default.js';
 
-// reference
+// ========== script ==========
+// DOM reference
 const form = document.querySelector('.quiz-form');
 const resultPercentage = document.querySelector('.result-percentage');
 
@@ -43,20 +44,30 @@ const quizChecker = {
 // score displayer
 const scoreDisplayer = {
     // properties
+    resultPercentage: resultPercentage,
 
     // methods
-
+    displayScore: function () {
+        this.resultPercentage.textContent = this.score;
+    }
 };
 
 // main
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+const main = function () {
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        
+        // quizChecker
+        const answers = quizChecker.getAnswers();
+        const userAnswers = quizChecker.getUserAnswers();
+        const score = quizChecker.getUserScore(answers, userAnswers);
+    
+        // scoreDisplayer
+        scoreDisplayer.score = score;
+        scoreDisplayer.displayScore();
 
-    const answers = quizChecker.getAnswers();
-    const userAnswers = quizChecker.getUserAnswers();
-    const score = quizChecker.getUserScore(answers, userAnswers);
+        form.reset();
+    });
+};
 
-    console.log(score);
-
-    form.reset();
-});
+main();
