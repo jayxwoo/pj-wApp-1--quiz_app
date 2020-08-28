@@ -5,23 +5,21 @@ import './default.js';
 const form = document.querySelector('.quiz-form');
 const resultPercentage = document.querySelector('.result-percentage');
 
-// answer checker class
-class AnswerChecker {
+// quiz checker class
+const quizChecker = {
     // properties
-    constructor(form) {
-        this.form = form;
-    }
+        form: form,
 
     // methods
-    getAnswers = function () {
+    getAnswers: function () {
         let answers = [];
         this.form.querySelectorAll('.question').forEach((question) => {
             answers.push(question.getAttribute('data-answer'));
         })
         return answers;
-    };
+    },
 
-    getUserAnswers = function () {
+    getUserAnswers: function () {
         let userAnswers = []
         let checkedRadios = this.form.querySelectorAll('.input-radio:checked');
         checkedRadios.forEach((checkedRadio) => {
@@ -29,9 +27,9 @@ class AnswerChecker {
         });
         
         return userAnswers;
-    };
+    },
 
-    getUserScore = function (answers, userAnswers) {
+    getUserScore: function (answers, userAnswers) {
         let score = 0;
         userAnswers.forEach((userAnswer, index) => {
             if (userAnswer === answers[index]) {
@@ -39,33 +37,26 @@ class AnswerChecker {
             };
         });
         return score;
-    };
+    }
 };
 
 // score displayer
-class ScoreDisplayer {
+const scoreDisplayer = {
     // properties
-    constructor(score) {
-        this.score = score;
-    }
 
     // methods
-    displayScore = function () {
-        resultPercentage.textContent = this.score;
-    };
-}
+
+};
 
 // main
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const answerChecker = new AnswerChecker(form);
-    const answers = answerChecker.getAnswers();
-    const userAnswers = answerChecker.getUserAnswers();
-    const score = answerChecker.getUserScore(answers, userAnswers);
-    
-    const scoreDisplayer = new ScoreDisplayer(score);
-    scoreDisplayer.displayScore();
+    const answers = quizChecker.getAnswers();
+    const userAnswers = quizChecker.getUserAnswers();
+    const score = quizChecker.getUserScore(answers, userAnswers);
+
+    console.log(score);
 
     form.reset();
 });
