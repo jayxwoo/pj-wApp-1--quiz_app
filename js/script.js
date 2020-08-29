@@ -4,23 +4,27 @@ import './default.js';
 // ========== script ==========
 // DOM reference
 const form = document.querySelector('.quiz-form');
+const resultContainer = document.querySelector('.result-container');
 const resultPercentage = document.querySelector('.result-percentage');
 
-// quiz checker class
-const quizChecker = {
+// quiz checker
+class QuizChecker {
     // properties
-        form: form,
+    constructor(form, resultPercentage) {
+        this.form = form;
+    }
 
     // methods
-    getAnswers: function () {
+    getAnswers = function () {
         let answers = [];
         this.form.querySelectorAll('.question').forEach((question) => {
             answers.push(question.getAttribute('data-answer'));
-        })
-        return answers;
-    },
+        });
 
-    getUserAnswers: function () {
+        return answers;
+    }
+
+    getUserAnswers = function () {
         let userAnswers = []
         let checkedRadios = this.form.querySelectorAll('.input-radio:checked');
         checkedRadios.forEach((checkedRadio) => {
@@ -28,29 +32,46 @@ const quizChecker = {
         });
         
         return userAnswers;
-    },
+    }
 
-    getUserScore: function (answers, userAnswers) {
+    getUserScore = function (answers, userAnswers) {
         let score = 0;
         userAnswers.forEach((userAnswer, index) => {
             if (userAnswer === answers[index]) {
                 score += 100 * (1/answers.length);
             };
         });
+
         return score;
     }
 };
 
 // score displayer
-const scoreDisplayer = {
+class ScoreDisplayer {
     // properties
-    resultPercentage: resultPercentage,
+    constructor(score, resultContainer, resultPercentage) {
+        this.score = score;
+        this.resultContainer = resultContainer;
+        this.resultPercentage = resultPercentage;
+    }
 
     // methods
-    displayScore: function () {
-        this.resultPercentage.textContent = this.score;
+    scrollUpToScore = function () {
+        this.resultContainer.scrollIntoView();
     }
-};
+
+    displayScore = function () {
+        let i = 0;
+        const timer = setInterval(() => {
+            this.resultPercentage.textContent = i;
+            i++;
+
+            if (i > this.score) {
+                clearInterval(timer);
+            };
+        }, 20);
+    }
+}
 
 // main
 const main = function () {
@@ -58,12 +79,14 @@ const main = function () {
         e.preventDefault();
         
         // quizChecker
+        const quizChecker = new QuizChecker(form, resultPercentage);
         const answers = quizChecker.getAnswers();
         const userAnswers = quizChecker.getUserAnswers();
         const score = quizChecker.getUserScore(answers, userAnswers);
-    
+
         // scoreDisplayer
-        scoreDisplayer.score = score;
+        const scoreDisplayer = new ScoreDisplayer(score, resultContainer, resultPercentage);
+        scoreDisplayer.scrollUpToScore();
         scoreDisplayer.displayScore();
 
         form.reset();
