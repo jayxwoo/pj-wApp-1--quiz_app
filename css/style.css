@@ -9,12 +9,14 @@
 ======================= */
 /* colors */
 :root {
-    --blue: rgba(3, 152, 252);
-    --darkBlue: rgba(0, 105, 166);
-    --lightblue: rgba(134, 188, 219);
-    --black: rgba(20, 20, 20);
+    --main: rgba(3, 152, 252);
+    --ocean: rgba(3, 152, 252);
+    --night: rgba(59, 59, 59);
+    --peach: rgba(235, 195, 176);
+    --carrot: rgba(230, 132, 28);
+    --banana: rgba(255, 187, 0);
     --grey: rgba(128, 128, 128);
-    --lightgrey: rgba(204, 204, 204);
+    --lightgrey: rgba(232, 232, 232);
 }
 
 
@@ -22,9 +24,13 @@
 [modules]
 ======================= */
 /* submit button */
-.submit-btn { padding: 0.7em; border: none; color: var(--blue); background: white; border-radius: 5px; cursor: pointer; outline: none; }
+.submit-btn { padding: 0.7em; border: none; color: var(--main); background: white; border-radius: 5px; cursor: pointer; outline: none; }
 .submit-btn:hover { background: var(--lightgrey); }
 .submit-btn:active { transform: translate(2px, 2px); }
+
+/* color button */
+.color-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; }
+.color-btn--active { border: 7px solid white; }
 
 
 /* ====================
@@ -38,15 +44,26 @@ body { font-family: Arial, Helvetica, sans-serif; }
 
 /* header */
 .header { border: 3px solid blue; padding: 30px; }
-.header-title { text-align: center; margin: 1em auto; font-size: 3em; color: var(--blue); text-transform: uppercase; }
+.header-title { text-align: center; margin: 1em auto; font-size: 3em; color: var(--main); text-transform: uppercase; }
+
+/* color theme */
+.color-theme-container { border: 3px solid turquoise; text-align: center; background: var(--lightgrey); padding: 2em; }
+.color-theme-title { color: var(--grey); }
+.color-btn-wrapper { display: flex; justify-content: center; margin-top: 1em; }
+.color-btn { margin: 0 10px; }
+.color-btn--night { background: var(--night); }
+.color-btn--peach { background: var(--peach); }
+.color-btn--carrot { background: var(--carrot); }
+.color-btn--banana { background: var(--banana); }
+.color-btn--ocean { background: var(--ocean); }
 
 /* result */
 .result-container { border: 3px solid pink; padding: 30px; }
 .result-text { text-align: center; margin: 1em auto; font-size: 1.5em; color: var(--grey); }
-.result-percentage { color: var(--blue); font-size: 2em; font-weight: bold; }
+.result-percentage { color: var(--main); font-size: 2em; font-weight: bold; }
 
 /* quiz form */
-.main { border: 3px solid red; background: var(--blue); padding: 30px; color: white; }
+.main { border: 3px solid red; background: var(--main); padding: 30px; color: white; }
 .quiz-form fieldset { border: none; }
 .quiz-form-title { font-weight: bold; font-size: 1.5em; border-bottom: 3px solid white; }
 .question-set:first-of-type { margin-top: 2em }

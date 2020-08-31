@@ -4,6 +4,7 @@ import './default.js';
 // ========== script ==========
 // DOM reference
 const form = document.querySelector('.quiz-form');
+const colorBtnWrapper = document.querySelector('.color-btn-wrapper');
 const resultContainer = document.querySelector('.result-container');
 const resultPercentage = document.querySelector('.result-percentage');
 
@@ -73,24 +74,48 @@ class ScoreDisplayer {
     }
 }
 
+// color theme picker
+class ColorThemePicker {
+    // properties
+    constructor(colorBtnWrapper, clickedBtn) {
+        this.colorBtnWrapper = colorBtnWrapper;
+        this.clickedBtn = clickedBtn;
+    }
+
+    // methods
+    getClickedColorBtn = function () {
+        console.log(this.clickedBtn);
+    }
+}
+
 // main
 const main = function () {
+    // QuizChecker
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         
-        // quizChecker
         const quizChecker = new QuizChecker(form, resultPercentage);
         const answers = quizChecker.getAnswers();
         const userAnswers = quizChecker.getUserAnswers();
         const score = quizChecker.getUserScore(answers, userAnswers);
 
-        // scoreDisplayer
+        // ScoreDisplayer
         const scoreDisplayer = new ScoreDisplayer(score, resultContainer, resultPercentage);
         scoreDisplayer.scrollUpToScore();
         scoreDisplayer.displayScore();
 
+        // reset form
         form.reset();
     });
+
+    // ColorThemePicker
+    colorBtnWrapper.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const colorThemePicker = new ColorThemePicker(colorBtnWrapper, e.target);
+        colorThemePicker.getClickedColorBtn();
+    });
+
 };
 
 main();
