@@ -3,6 +3,7 @@ import './default.js';
 
 // ========== script ==========
 // DOM reference
+const root = document.documentElement;
 const form = document.querySelector('.quiz-form');
 const colorBtnWrapper = document.querySelector('.color-btn-wrapper');
 const resultContainer = document.querySelector('.result-container');
@@ -83,9 +84,21 @@ class ColorThemePicker {
     }
 
     // methods
-    getClickedColorBtn = function () {
-        console.log(this.clickedBtn);
+    changeTheme = function () {
+        const newColor = this.clickedBtn.getAttribute('aria-label');
+        const newColorCode = getComputedStyle(document.documentElement).getPropertyValue(`--${newColor}`);
+        
+        root.style.setProperty('--main', newColorCode);
     }
+
+    reAssignActive = function () {
+        const buttons = Array.from(this.colorBtnWrapper.querySelectorAll('button'));
+        const currentActiveButton = buttons.find(function (button) {
+            return button.classList.contains('color-btn--active');
+        });
+        currentActiveButton.classList.remove('color-btn--active');
+        this.clickedBtn.classList.add('color-btn--active');
+    } 
 }
 
 // main
@@ -111,9 +124,10 @@ const main = function () {
     // ColorThemePicker
     colorBtnWrapper.addEventListener('click', function (e) {
         e.preventDefault();
-
+        
         const colorThemePicker = new ColorThemePicker(colorBtnWrapper, e.target);
-        colorThemePicker.getClickedColorBtn();
+        colorThemePicker.changeTheme();
+        colorThemePicker.reAssignActive();
     });
 
 };
