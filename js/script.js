@@ -125,9 +125,11 @@ const main = function () {
     colorBtnWrapper.addEventListener('click', function (e) {
         e.preventDefault();
         
-        const colorThemePicker = new ColorThemePicker(colorBtnWrapper, e.target);
-        colorThemePicker.changeTheme();
-        colorThemePicker.reAssignActive();
+        if (e.target.tagName === 'BUTTON') {
+            const colorThemePicker = new ColorThemePicker(colorBtnWrapper, e.target);
+            colorThemePicker.changeTheme();
+            colorThemePicker.reAssignActive();
+        };
     });
 
 };
