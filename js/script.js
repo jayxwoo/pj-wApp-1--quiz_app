@@ -8,6 +8,7 @@ const form = document.querySelector('.quiz-form');
 const colorBtnWrapper = document.querySelector('.color-btn-wrapper');
 const resultContainer = document.querySelector('.result-container');
 const resultPercentage = document.querySelector('.result-percentage');
+const resetBtn = document.querySelector('.reset-btn');
 
 // quiz checker
 class QuizChecker {
@@ -98,7 +99,7 @@ class ColorThemePicker {
         });
         currentActiveButton.classList.remove('color-btn--active');
         this.clickedBtn.classList.add('color-btn--active');
-    } 
+    }
 }
 
 // main
@@ -132,6 +133,14 @@ const main = function () {
         };
     });
 
+    // reset button
+    resetBtn.addEventListener('click', () => {
+        // reset form
+        form.reset();
+
+        // reset score
+        resultPercentage.textContent = 0;
+    });
 };
 
 main();
