@@ -9,6 +9,7 @@ const colorBtnWrapper = document.querySelector('.color-btn-wrapper');
 const resultContainer = document.querySelector('.result-container');
 const resultPercentage = document.querySelector('.result-percentage');
 const resetBtn = document.querySelector('.reset-btn');
+const topBtn = document.querySelector('.top-btn')
 
 // quiz checker
 class QuizChecker {
@@ -140,6 +141,15 @@ const main = function () {
 
         // reset score
         resultPercentage.textContent = 0;
+    });
+
+    // top button
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 5) {
+            topBtn.classList.add('top-btn--active');
+        } else {
+            topBtn.classList.remove('top-btn--active');
+        };
     });
 };
 
