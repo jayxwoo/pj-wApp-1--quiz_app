@@ -103,6 +103,31 @@ class ColorThemePicker {
     }
 }
 
+// scroll to top button
+class ScrollToTopBtn {
+    // properties
+    constructor(topBtn) {
+        this.topBtn = topBtn;
+    }
+
+    // method
+    showBtnOnScroll = function () {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 5) {
+                this.topBtn.classList.add('top-btn--active');
+            } else {
+                this.topBtn.classList.remove('top-btn--active');
+            };
+        });
+    }
+
+    scrollToTop = function () {
+        this.topBtn.addEventListener('click', () => {
+            window.scrollTo(0, 0);
+        });
+    }
+}
+
 // main
 const main = function () {
     // QuizChecker
@@ -144,13 +169,9 @@ const main = function () {
     });
 
     // top button
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 5) {
-            topBtn.classList.add('top-btn--active');
-        } else {
-            topBtn.classList.remove('top-btn--active');
-        };
-    });
+    const scrollToTopBtn = new ScrollToTopBtn(topBtn);
+    scrollToTopBtn.showBtnOnScroll();
+    scrollToTopBtn.scrollToTop();
 };
 
 main();
