@@ -72,6 +72,14 @@ class ScoreDisplayer {
 
             if (i > this.score) {
                 clearInterval(timer);
+
+                if (i-1 === 100) {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                };
             };
         }, 20);
     }
