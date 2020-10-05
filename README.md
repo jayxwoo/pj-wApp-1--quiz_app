@@ -7,6 +7,11 @@
 - HTML
 - CSS
 - JavaScript
-  - async
-  - fetch
-  - API
+  - DOM manipulation
+  - object
+  - class
+  - event listener
+  - forEach
+  - scrollIntoView
+  - setInterval & clearInterval
+  - external library; canvas-confetti
